@@ -1,0 +1,15 @@
+---
+- name: BSD | WireGuard installed
+  package:
+    name: wireguard
+    state: present
+
+- set_fact:
+    service_name: wireguard
+
+- name: BSD | Configure rc script
+  copy:
+    src: wireguard.sh
+    dest: /usr/local/etc/rc.d/wireguard
+    mode: "0755"
+  notify: restart wireguard
